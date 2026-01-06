@@ -1,0 +1,40 @@
+#pragma once
+
+class Ship {
+    
+    protected:
+        char* name;
+        int size;
+        int hitsTaken;
+
+    public:
+        Ship(const char* shipName, int shipSize);
+        virtual ~Ship(); 
+        virtual void takeHit();
+        bool isSunk() const;
+};
+
+class Carrier : public Ship {
+public:
+    Carrier();
+};
+
+class Battleship : public Ship {
+public:
+    Battleship();
+};
+
+class Cruiser : public Ship {
+public:
+    Cruiser();
+};
+
+class Submarine : public Ship {
+public:
+    Submarine();
+};
+
+class Destroyer : public Ship {
+public:
+    Destroyer();
+};
