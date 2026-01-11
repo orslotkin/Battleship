@@ -69,16 +69,23 @@ char Grid::getCell(int row, int col) const
     return cells[row][col];
 }
 
-void Grid::printGrid()
+void Grid::printGrid(bool showShips = true)
 {
-    std::cout << "  0 1 2 3 4 5 6 7 8 9" << std::endl;
+   std::cout << "  0 1 2 3 4 5 6 7 8 9" << std::endl;
     for (int i = 0; i < 10; i++) {
         std::cout << i << " "; 
-        for (int j = 0; j < 10; j++) 
-            std::cout << getCell(i,j) << " ";
+        for (int j = 0; j < 10; j++) {
+            char cell = getCell(i,j); 
+            if (!showShips && cell == 'S') {
+                std::cout << "~ ";
+            } else {
+                std::cout << cell << " ";
+            }
+        }
         std::cout << std::endl;
     }
 }
+
 Ship* Grid::getShipAt(int row, int col) const {
     return shipPointers[row][col]; 
 }

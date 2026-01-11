@@ -14,7 +14,7 @@ class Player
         virtual void placeAllShips() = 0;
         virtual void makeMove(Player* opponent) = 0;
         bool allShipsSunk() const;
-        void displayGrid();
+        void displayGrid(bool showShips);
         Grid& getGrid() { return grid; }
         const char* getName() const { return playerName; }
 };

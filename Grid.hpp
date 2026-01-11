@@ -16,6 +16,6 @@ class Grid {
         void markHit(int row, int col);
         void markMiss(int row, int col);
         char getCell(int row, int col) const;
-        void printGrid();
+        void printGrid(bool showShips = true);
         Ship* getShipAt(int row, int col) const;
 };
