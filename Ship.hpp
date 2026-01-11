@@ -10,6 +10,7 @@ class Ship {
     public:
         Ship(const char* shipName, int shipSize);
         virtual ~Ship(); 
+        int getSize() const { return size; }
         virtual void takeHit();
         bool isSunk() const;
 };

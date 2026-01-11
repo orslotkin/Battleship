@@ -6,15 +6,25 @@ Grid::Grid()
     for(int i=0 ; i<10; i++)
     {
         for(int j=0 ; j<10; j++)
+        {
             cells[i][j] = '~' ;
+            shipPointers[i][j] = nullptr;
+        }
     }
 }
 
-bool Grid::isTileOccupied(int row, int col) const
+bool Grid::isTileOccupied(int row, int col, int shipSize, bool horizontal) const
 {
-    if(cells[row][col] == '~')
-        return false;
-    return true;
+    for (int i = 0; i < shipSize; i++) {
+        int currentRow = horizontal ? row : row + i;
+        int currentCol = horizontal ? col + i : col;
+
+        if (cells[currentRow][currentCol] != '~') 
+        {
+            return true; 
+        }
+    }
+    return false;
 }
 
 bool Grid::inBounds(int row, int col, int shipSize, bool horizontal) const
@@ -68,4 +78,7 @@ void Grid::printGrid()
             std::cout << getCell(i,j) << " ";
         std::cout << std::endl;
     }
+}
+Ship* Grid::getShipAt(int row, int col) const {
+    return shipPointers[row][col]; 
 }
