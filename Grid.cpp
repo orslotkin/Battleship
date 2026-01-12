@@ -30,14 +30,15 @@ bool Grid::inBounds(int row, int col, int shipSize, bool horizontal) const
 {
     if (row < 0 || row >= 10 || col < 0 || col >= 10) 
         return false;
-    if (horizontal) 
+    if (horizontal) { 
         if (col + shipSize > 10) 
             return false;
-    else 
+    }
+    else { 
         if (row + shipSize > 10) 
             return false;
-    
-     return true;
+    } 
+    return true;
 }
 
 void Grid::placeShip(int row, int col, int shipSize, bool horizontal, char symbol)
