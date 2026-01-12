@@ -61,4 +61,6 @@ void AiPlayer ::makeMove(Player* opponent)
         }
     }
     displayGrid(false);
+    cout << "Your Board Status:" << endl;
+    opponent->displayGrid(true);
 }

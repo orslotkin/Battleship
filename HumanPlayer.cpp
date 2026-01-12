@@ -72,5 +72,4 @@ void HumanPlayer:: makeMove(Player* opponent)
             moveFinished = true;
         }
     }
-    displayGrid(true);
 }

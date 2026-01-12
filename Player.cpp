@@ -40,6 +40,5 @@ bool Player::allShipsSunk() const
 
 void Player::displayGrid(bool showShips)
 {
-    std::cout << "Grid for player: " << this->playerName << std::endl;
     grid.printGrid(showShips);
 }
