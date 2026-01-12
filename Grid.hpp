@@ -6,7 +6,6 @@ class Grid {
 
     private:
         char cells[10][10];
-        Ship* shipPointers[10][10];
         
     public:
         Grid();
@@ -17,5 +16,4 @@ class Grid {
         void markMiss(int row, int col);
         char getCell(int row, int col) const;
         void printGrid(bool showShips = true);
-        Ship* getShipAt(int row, int col) const;
 };

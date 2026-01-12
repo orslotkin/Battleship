@@ -8,7 +8,6 @@ Grid::Grid()
         for(int j=0 ; j<10; j++)
         {
             cells[i][j] = '~' ;
-            shipPointers[i][j] = nullptr;
         }
     }
 }
@@ -69,7 +68,7 @@ char Grid::getCell(int row, int col) const
     return cells[row][col];
 }
 
-void Grid::printGrid(bool showShips = true)
+void Grid::printGrid(bool showShips)
 {
    std::cout << "  0 1 2 3 4 5 6 7 8 9" << std::endl;
     for (int i = 0; i < 10; i++) {
@@ -84,8 +83,4 @@ void Grid::printGrid(bool showShips = true)
         }
         std::cout << std::endl;
     }
-}
-
-Ship* Grid::getShipAt(int row, int col) const {
-    return shipPointers[row][col]; 
 }

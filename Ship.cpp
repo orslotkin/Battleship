@@ -38,6 +38,21 @@ bool Ship::isSunk() const
     return false;
 }
 
+char Ship::getSimble() const
+{
+    if(strcmp(this->name,"Carrier") == 0)
+        return 'C';
+    if(strcmp(this->name,"Battleship") == 0)
+        return 'B';
+    if(strcmp(this->name,"Cruiser") == 0)
+        return 'c';
+    if(strcmp(this->name,"Submarine") == 0)
+        return 'S'; 
+    if(strcmp(this->name,"Destroyer") == 0)
+        return 'D';   
+    return '?';  
+}
+
 Carrier::Carrier() : Ship("Carrier", 5){}
 
 Battleship::Battleship() : Ship("Battleship", 4){}

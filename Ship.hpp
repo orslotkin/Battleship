@@ -13,6 +13,7 @@ class Ship {
         int getSize() const { return size; }
         virtual void takeHit();
         bool isSunk() const;
+        char getSimble() const;
 };
 
 class Carrier : public Ship {

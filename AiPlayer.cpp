@@ -23,7 +23,7 @@ void AiPlayer:: placeAllShips()
 
             if (grid.inBounds(row, col, ships[i]->getSize(), isHorizontal) && !grid.isTileOccupied(row, col, ships[i]->getSize(), isHorizontal))
             {
-                grid.placeShip(row, col, ships[i]->getSize(), isHorizontal, 'S');
+                grid.placeShip(row, col, ships[i]->getSize(), isHorizontal, ships[i]->getSimble());
                 placed=true;
             } 
         }
@@ -33,27 +33,32 @@ void AiPlayer:: placeAllShips()
 void AiPlayer ::makeMove(Player* opponent)
 {
     int row, col;
-    bool moveFinished=false;
+    bool moveFinished = false;
     while(!moveFinished)
     {
         row = getRandomCoordinate();
         col = getRandomCoordinate();
-        char targetCell=opponent->getGrid().getCell(row, col);
-        if(targetCell== 'X' || targetCell=='M')  continue;
+        char targetCell = opponent->getGrid().getCell(row, col);
+        if(targetCell == 'X' || targetCell == 'M') continue;
         cout << playerName << " attacks coordinates (" << row << ", " << col << "): ";
-        if(targetCell=='S')
+        if(targetCell != '~')
         { 
             cout << "HIT!" << endl;
-            Ship* hitShip = opponent->getGrid().getShipAt(row, col);
-            if(!hitShip) hitShip->takeHit();
+            for(int i = 0; i < 5; i++) 
+            {
+                if(opponent->getShip(i)->getSimble() == targetCell){
+                    opponent->getShip(i)->takeHit();
+                    break;
+                }
+            }
             opponent->getGrid().markHit(row, col);
             moveFinished = true;
         } 
-        else{
+        else {
             cout << "MISS!" << endl;
             opponent->getGrid().markMiss(row, col);
             moveFinished = true;
         }
     }
-    displayGrid();
+    displayGrid(false);
 }

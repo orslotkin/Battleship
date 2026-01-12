@@ -26,7 +26,7 @@ void HumanPlayer:: placeAllShips()
 
             if (grid.inBounds(row, col, ships[i]->getSize(), isHorizontal) && !grid.isTileOccupied(row, col, ships[i]->getSize(), isHorizontal))
             {
-                grid.placeShip(row, col, ships[i]->getSize(), isHorizontal, 'S');
+                grid.placeShip(row, col, ships[i]->getSize(), isHorizontal, ships[i]->getSimble());
                 placed=true;
                 cout << " Ship placed successfully" << endl;
             } else {
@@ -38,34 +38,39 @@ void HumanPlayer:: placeAllShips()
 void HumanPlayer:: makeMove(Player* opponent)
 {
     int row, col;
-    bool moveFinished=false;
+    bool moveFinished = false;
     while(!moveFinished)
     {
         cout << " Enter coordinates to attack- row (0-9) and col (0-9) ";
-        cin >> row>> col;
+        cin >> row >> col;
         if(row < 0 || row >= 10 || col < 0 || col >= 10)
         {
             cout << "Invalid coordinates! Try again." << endl; 
             continue;
         }
-        char targetCell=opponent->getGrid().getCell(row, col);
-        if(targetCell== 'X' || targetCell=='M') cout << " You already attacked this spot. Try somewhere else!" << endl;
-        else if(targetCell=='S')
+        char targetCell = opponent->getGrid().getCell(row, col);
+        if(targetCell == 'X' || targetCell == 'M') 
+        {
+            cout << " You already attacked this spot. Try somewhere else!" << endl;
+        }
+        else if(targetCell != '~')
         { 
             cout << " HIT!" << endl;
-            Ship* hitShip = opponent->getGrid().getShipAt(row, col);
-            if(!hitShip)
+            for(int i = 0; i < 5; i++) 
             {
-            hitShip->takeHit();
-            opponent->getGrid().markHit(row, col);
-            moveFinished= true;
+                if(opponent->getShip(i)->getSimble() == targetCell) {
+                    opponent->getShip(i)->takeHit();
+                    break;
+                }
             }
+            opponent->getGrid().markHit(row, col);
+            moveFinished = true;
         } 
-        else{
+        else {
             cout << " MISS!" << endl;
             opponent->getGrid().markMiss(row, col);
             moveFinished = true;
         }
     }
-    displayGrid();
+    displayGrid(true);
 }
